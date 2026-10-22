@@ -2,6 +2,8 @@
 
 Este subprojeto é um site estático e usa `dist/` como pasta de publicação.
 
+Os arquivos são gerados da aplicação original em `app/` e `components/`, sem manter uma segunda implementação. Para atualizar, execute `node scripts/build-cloudflare.mjs` na raiz do repositório e envie o resultado para o GitHub.
+
 ## Configuração do Cloudflare Pages
 
 - Repositório conectado: `lcbldcunha-lgtm/Sites-animados`
