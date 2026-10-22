@@ -1,8 +1,8 @@
 name: Publicar portfólio no GitHub Pages
 
 on:
-  push:
-    branches: [main]
+  # O site atual é publicado pela integração Git do Cloudflare Pages.
+  # Este workflow legado permanece disponível apenas para execução manual.
   workflow_dispatch:
 
 permissions:

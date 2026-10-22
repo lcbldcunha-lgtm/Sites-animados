@@ -4,6 +4,12 @@ Portfólio de fotografia em Next.js, TypeScript, Tailwind CSS, GSAP e Lenis.
 
 Repositório: [lcbldcunha-lgtm/Sites-animados](https://github.com/lcbldcunha-lgtm/Sites-animados).
 
+## Publicação atual
+
+O site está hospedado em [Cloudflare Pages](https://lucas-balica-fotografia.pages.dev/), com integração ao GitHub. Execute `node scripts/build-cloudflare.mjs` para atualizar `cloudflare-portfolio/dist` e envie as alterações para `main`. A configuração do Cloudflare está documentada em `cloudflare-portfolio/README.md`.
+
+O workflow legado `.github/workflows/deploy-pages.yml` não roda em envios ao repositório nem por agendamento. Ele foi mantido apenas para execução manual, caso uma publicação no GitHub Pages seja necessária no futuro. A publicação automática atual é feita pelo Cloudflare.
+
 ## Desenvolvimento
 
 Requer Node.js >= 20.9 e pnpm. Na pasta do projeto:
@@ -39,6 +45,6 @@ A direção visual foi atualizada a partir da referência fornecida e personaliz
 - Animações respeitam a preferência por movimento reduzido.
 - Fontes do sistema para desenvolvimento independente de downloads de fontes.
 - Contatos e redes sociais aguardam os dados reais do fotógrafo.
-- Código e fotos otimizadas versionados no GitHub. A publicação usa GitHub Actions e GitHub Pages; cada envio para `main` atualiza o site.
+- Código e fotos otimizadas versionados no GitHub; publicação atual pelo Cloudflare Pages.
 
 Antes de publicar, revisar fotos, títulos, apresentação e contatos. Não foram inventados clientes, depoimentos ou dados de contato.
