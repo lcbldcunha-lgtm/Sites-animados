@@ -101,3 +101,12 @@ footer { padding:60px var(--pad) 28px; color:var(--ink); background:#e0b62a; } .
   .lightbox .lightbox-nav { width:54px; height:96px; padding:8px; border-radius:20px; }
   .lightbox .lightbox-nav > span { font-size:10px; }
 }
+
+@font-face {
+  font-family:'Portfolio Display';
+  src:url('/fonts/Anton-Regular.ttf') format('truetype');
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+:root { --display:'Portfolio Display',Impact,'Arial Narrow',sans-serif; }
