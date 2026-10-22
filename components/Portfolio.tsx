@@ -14,6 +14,8 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 const categories = ['Todas', 'Natureza', 'Pessoas'] as const;
 type Category = typeof categories[number];
 type Photo = typeof photos[number];
+const imageBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const photoSrc = (src: string) => `${imageBasePath}${src}`;
 
 function RollLink({ href, children }: { href: string; children: string }) {
   return <a href={href} className="roll-link" aria-label={children}><span className="roll-window"><span>{children}</span><span aria-hidden="true">{children}</span></span><span aria-hidden="true">↗</span></a>;
@@ -140,8 +142,8 @@ export function Portfolio() {
         </div>
         <div className="hero-collage" aria-label="Uma pequena seleção do portfólio">
           <span className="collage-spark" aria-hidden="true">✳</span>
-          <button className="collage-card collage-main" onClick={event => open(mainPhoto, event.currentTarget)} aria-label={`Ampliar foto de abertura: ${mainPhoto.title}`}><Image src={mainPhoto.src} alt={mainPhoto.alt} fill sizes="(max-width: 600px) 65vw, 30vw" priority /><span>{mainPhoto.title} ↗</span></button>
-          <button className="collage-card collage-small" onClick={event => open(smallPhoto, event.currentTarget)} aria-label={`Ampliar foto de abertura: ${smallPhoto.title}`}><Image src={smallPhoto.src} alt={smallPhoto.alt} loading="eager" fill sizes="(max-width: 600px) 35vw, 16vw" /><span>O afeto também é paisagem.</span></button>
+          <button className="collage-card collage-main" onClick={event => open(mainPhoto, event.currentTarget)} aria-label={`Ampliar foto de abertura: ${mainPhoto.title}`}><Image src={photoSrc(mainPhoto.src)} alt={mainPhoto.alt} fill sizes="(max-width: 600px) 65vw, 30vw" priority /><span>{mainPhoto.title} ↗</span></button>
+          <button className="collage-card collage-small" onClick={event => open(smallPhoto, event.currentTarget)} aria-label={`Ampliar foto de abertura: ${smallPhoto.title}`}><Image src={photoSrc(smallPhoto.src)} alt={smallPhoto.alt} loading="eager" fill sizes="(max-width: 600px) 35vw, 16vw" /><span>O afeto também é paisagem.</span></button>
           <div className="collage-note"><span>{photos.length} fotografias.</span><strong><ScrollTitle as="span" periodic lines={['Infinitas', 'maneiras', 'de sentir.']} /></strong><span aria-hidden="true">↙</span></div>
           <svg className="collage-doodle" viewBox="0 0 200 150" aria-hidden="true"><path d="M25 15C140-15 190 50 145 75S42 48 90 33s128 96 29 103m0 0 20-30m-20 30 36-3" /></svg>
         </div>
@@ -154,7 +156,7 @@ export function Portfolio() {
         <div className="gallery-toolbar"><div className="filters" role="group" aria-label="Filtrar fotografias">{categories.map(item => <button key={item} aria-label={item} aria-pressed={category === item} onClick={() => setCategory(item)}><TypeText text={item} /><span className="filter-count"><TypeText text={String(item === 'Todas' ? photos.length : photos.filter(photo => photo.category === item).length).padStart(2, '0')} /></span></button>)}</div><p className="small-label" aria-live="polite"><TypeText text={`${String(visible.length).padStart(2, '0')} fotografias`} /></p></div>
         <div className="photo-grid">{visible.map(photo => <figure key={photo.id} className="photo-card">
           <button className="photo-button" onClick={event => open(photo, event.currentTarget)} aria-label={`Ampliar: ${photo.title}`}>
-            <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw" />
+            <Image src={photoSrc(photo.src)} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw" />
             <span className="photo-open" aria-hidden="true">↗</span>
           </button><figcaption><span><TypeText text={photo.title} /></span><span><TypeText text={photo.category} /></span></figcaption>
         </figure>)}</div>
@@ -181,8 +183,8 @@ export function Portfolio() {
           const dx = touch.clientX - start.x;
           if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(touch.clientY - start.y) * 1.2) step(dx < 0 ? 1 : -1);
         }}>
-          {previous && <div className="lightbox-frame" data-photo-previous aria-hidden="true"><Image className="lightbox-photo" src={previous.src} alt="" width={previous.width} height={previous.height} sizes="95vw" /></div>}
-          <div key={selected.id} className="lightbox-frame" data-photo-current><Image className="lightbox-photo" src={selected.src} alt={selected.alt} width={selected.width} height={selected.height} sizes="95vw" loading="eager" onLoad={() => setImageReady(true)} onError={() => setImageReady(true)} draggable={false} /></div>
+          {previous && <div className="lightbox-frame" data-photo-previous aria-hidden="true"><Image className="lightbox-photo" src={photoSrc(previous.src)} alt="" width={previous.width} height={previous.height} sizes="95vw" /></div>}
+          <div key={selected.id} className="lightbox-frame" data-photo-current><Image className="lightbox-photo" src={photoSrc(selected.src)} alt={selected.alt} width={selected.width} height={selected.height} sizes="95vw" loading="eager" onLoad={() => setImageReady(true)} onError={() => setImageReady(true)} draggable={false} /></div>
         </div>
         <button className="lightbox-nav lightbox-nav--previous" onClick={() => step(-1)} aria-label="Fotografia anterior"><span className="lightbox-nav-icon" aria-hidden="true">‹</span><span className="lightbox-nav-label"><TypeText text="Anterior" once /></span></button>
         <button className="lightbox-nav lightbox-nav--next" onClick={() => step(1)} aria-label="Próxima fotografia"><span className="lightbox-nav-icon" aria-hidden="true">›</span><span className="lightbox-nav-label"><TypeText text="Próxima" once /></span></button>

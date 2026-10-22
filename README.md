@@ -39,6 +39,6 @@ A direção visual foi atualizada a partir da referência fornecida e personaliz
 - Animações respeitam a preferência por movimento reduzido.
 - Fontes do sistema para desenvolvimento independente de downloads de fontes.
 - Contatos e redes sociais aguardam os dados reais do fotógrafo.
-- Código e fotos otimizadas versionados no GitHub; hospedagem pública ainda não configurada.
+- Código e fotos otimizadas versionados no GitHub. A publicação usa GitHub Actions e GitHub Pages; cada envio para `main` atualiza o site.
 
 Antes de publicar, revisar fotos, títulos, apresentação e contatos. Não foram inventados clientes, depoimentos ou dados de contato.
