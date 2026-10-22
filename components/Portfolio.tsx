@@ -6,19 +6,20 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import Lenis from 'lenis';
-import photos from '@/data/photos.json';
+import photoData from '@/data/photos.json';
 import { BackgroundShutters } from './BackgroundShutters';
 import { ScrollTitle, TypeText } from './ScrollTitle';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
-const categories = ['Todas', 'Natureza', 'Pessoas'] as const;
+const photos = [...photoData].sort((a, b) => Number(b.category === 'Pessoas') - Number(a.category === 'Pessoas'));
+const categories = ['Todas', 'Pessoas', 'Natureza'] as const;
 type Category = typeof categories[number];
 type Photo = typeof photos[number];
 const imageBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 const photoSrc = (src: string) => `${imageBasePath}${src}`;
 
 function RollLink({ href, children }: { href: string; children: string }) {
-  return <a href={href} className="roll-link" aria-label={children}><span className="roll-window"><span>{children}</span><span aria-hidden="true">{children}</span></span><span aria-hidden="true">↗</span></a>;
+  return <a href={href} className="roll-link" aria-label={children}><span className="roll-window"><span>{children === 'Contato' ? <TypeText text={children} once /> : children}</span><span aria-hidden="true">{children}</span></span><span aria-hidden="true">↗</span></a>;
 }
 
 export function Portfolio() {
@@ -130,7 +131,7 @@ export function Portfolio() {
     <header className="header">
       <a href="#inicio" className="wordmark" aria-label="Lucas Balica, início"><ScrollTitle as="span" periodic lines={['Lucas', 'Balica.']} /></a>
       <span className="header-name">Fotógrafo<br /><small>Um jeito de ver o mundo</small></span>
-      <nav aria-label="Navegação principal"><RollLink href="#galeria">Fotografias</RollLink><RollLink href="#olhar">Meu olhar</RollLink></nav>
+      <nav aria-label="Navegação principal"><RollLink href="#galeria">Fotografias</RollLink><RollLink href="#olhar">Meu olhar</RollLink><RollLink href="#contato">Contato</RollLink></nav>
     </header>
 
     <main id="inicio">
@@ -164,7 +165,7 @@ export function Portfolio() {
 
       <section id="olhar" className="about" aria-labelledby="about-title"><p className="eyebrow"><TypeText text="02 — Por trás do olhar" /></p><div className="about-copy"><p className="about-intro"><TypeText text="Muito prazer," /></p><ScrollTitle id="about-title" lines={['Lucas Balica', 'Fotógrafo.']} /><p><TypeText text="Este é meu espaço para compartilhar imagens. Um encontro entre a natureza, as pessoas e os pequenos instantes do cotidiano." /></p><a href="#galeria" className="text-link" aria-label="Voltar às fotografias"><TypeText text="Voltar às fotografias" /><span aria-hidden="true">↗</span></a></div><span className="about-star" aria-hidden="true">✳</span></section>
     </main>
-    <footer><p className="eyebrow"><TypeText text="O mundo não para. O olhar fica." /></p><a className="footer-title" href="#galeria"><ScrollTitle as="span" lines={['Olhe de novo.', 'Sinta diferente.']} /><span aria-hidden="true">↗</span></a><div className="footer-bottom"><span><TypeText text="Lucas Balica — Meu portfólio" /></span><a href="#inicio" aria-label="Voltar ao início"><TypeText text="Voltar ao início" /> ↑</a></div></footer>
+    <footer id="contato"><div className="contact-links"><div><p className="eyebrow"><TypeText text="Vamos conversar?" /></p><ScrollTitle lines={['Seu próximo clique', 'começa aqui.']} /></div><div className="contact-actions"><a href="https://www.instagram.com/lucas_balica/" target="_blank" rel="noopener noreferrer"><TypeText text="Instagram" /> <span><TypeText text="@lucas_balica" /> ↗</span></a><a href="https://wa.me/5585988860244" target="_blank" rel="noopener noreferrer"><TypeText text="WhatsApp" /> <span><TypeText text="(85) 98886-0244" /> ↗</span></a></div></div><p className="eyebrow"><TypeText text="O mundo não para. O olhar fica." /></p><a className="footer-title" href="#galeria"><ScrollTitle as="span" lines={['Olhe de novo.', 'Sinta diferente.']} /><span aria-hidden="true">↗</span></a><div className="footer-bottom"><span><TypeText text="Lucas Balica — Meu portfólio" /></span><a href="#inicio" aria-label="Voltar ao início"><TypeText text="Voltar ao início" /> ↑</a></div></footer>
 
     <dialog ref={dialog} className="lightbox" aria-label="Fotografia ampliada" onCancel={close}
       onClick={event => { if (!(event.target as Element).closest('.lightbox-photo, button, [data-lightbox-controls] > span')) close(); }}
