@@ -64,3 +64,40 @@ footer { padding:60px var(--pad) 28px; color:var(--ink); background:#e0b62a; } .
 .inline-typing .typing-line { display:inline; }
 .inline-typing .typing-caret::after { display:none; }
 .collage-note strong > .scroll-title { font:inherit; }
+
+/* Keep the composition within narrow screens, including small phones. */
+@media (max-width: 700px) {
+  :root { --pad:clamp(16px,5vw,30px); }
+  html,body { overflow-x:clip; }
+  .hero { grid-template-columns:minmax(0,1fr); }
+  .hero-heading,.hero-collage,.about-copy { min-width:0; }
+  .header { gap:14px; }
+  .header-name { display:none; }
+  nav { gap:clamp(10px,3vw,22px); }
+  .roll-link { font-size:10px; gap:5px; min-height:44px; }
+  .hero h1 { font-size:19vw; margin-left:0; }
+  .hero-heading > .eyebrow { font-size:9px; }
+  .hero-description { font-size:15px; }
+  .hero-collage { height:auto; aspect-ratio: .88; margin:32px 4% 20px; }
+  .collage-main { width:69%; height:77%; right:4%; }
+  .collage-small { width:43%; height:49%; left:0; }
+  .collage-note { width:46%; right:0; bottom:0; padding:12px; }
+  .collage-note strong { font-size:clamp(21px,5.8vw,36px); }
+  .collage-note > span:first-child { font-size:7px; }
+  .collage-spark { right:-3%; font-size:50px; }
+  .hero-bottom { margin-top:18px; flex-wrap:wrap; }
+  .gallery-title-row h2 { font-size:12.5vw; }
+  .filters { flex-wrap:wrap; }
+  .filters button { min-height:44px; padding:11px 10px; }
+  .filters button .filter-count { margin-left:6px; }
+  .photo-grid { columns:1; }
+  .about { grid-template-columns:minmax(0,1fr); gap:24px; }
+  .about h2 { font-size:14vw; }
+  .footer-title { font-size:12vw; padding-right:0; }
+  .footer-title > span { font-size:32px; top:-20px; }
+  .footer-bottom { flex-wrap:wrap; line-height:1.6; }
+  .lightbox { padding:16px 12px; }
+  .lightbox-top,.lightbox-bottom { font-size:10px; gap:8px; }
+  .lightbox .lightbox-nav { width:54px; height:96px; padding:8px; border-radius:20px; }
+  .lightbox .lightbox-nav > span { font-size:10px; }
+}
