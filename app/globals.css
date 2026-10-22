@@ -51,6 +51,7 @@ footer { padding:60px var(--pad) 28px; color:var(--ink); background:#e0b62a; } .
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; } .ticker-track { width:auto; } .ticker-run { min-width:0; } .ticker-run > span { display:none; } .ticker-run:first-child > span:first-child { display:flex; } }
 
 .typing-line { display:block; }
+.hero h1 .typing-line { white-space:nowrap; }
 .typing-word { display:inline-block; white-space:nowrap; }
 .typing-character { display:inline-block; position:relative; }
 .typing-caret::after { content:""; position:absolute; left:100%; top:.1em; height:.8em; width:.035em; min-width:2px; background:currentColor; animation:typing-blink .9s steps(1) infinite; }
